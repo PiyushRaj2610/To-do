@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const { string } = require("zod");
 
 
-mongoose.connect('url')
+mongoose.connect('mongodb+srv://Anjan:Ancient%407645@cluster0.7mroy.mongodb.net/piyush')
 
 const todosSchema = mongoose.Schema({
   title: String,

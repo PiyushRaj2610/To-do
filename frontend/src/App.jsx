@@ -6,18 +6,20 @@ import { CreateTodo } from './components/CreateTodo'
 import { Todos } from './components/Todos'
 
 function App() {
-  const [count, setCount] = useState([]);
+  const [todos, setTodos] = useState([]);
 
-  fetch("http://localhost:3000/todos")
+  function setTheTodo() {
+    fetch("http://localhost:3000/todos")
     .then(async function(res) {
       const json = await res.json();
       setTodos(json.todos);
-  })
+    })
+  }
 
   return (
     <div>
-      <CreateTodo setTodos={setTodos}></CreateTodo>
-      <Todos todos={todos} setTodos={setTodos} ></Todos>
+      <CreateTodo todos={todos} setTodos={setTheTodo}></CreateTodo>
+      <Todos todos={todos} setTodos={setTheTodo} ></Todos>
     </div>
   )
 }
