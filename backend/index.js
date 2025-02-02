@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.post("/todo", async function(req, res){
+app.post("/todos", async function(req, res){
   const createPayload = req.body;   // creates an object of the value
   const parsedPayload = createTodo.safeParse(createPayload); //checks if the values are string using zod schema
   if(!parsedPayload.success){

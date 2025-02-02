@@ -1,9 +1,31 @@
 import { useState } from "react";
+import axios from "axios";
 
-export function CreateTodo(props){
+export function CreateTodo({ todos, setTodos }){
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+
+  function callBackend() {      
+      fetch("http://localhost:3000/todos",{
+        method: "POST",
+        body: JSON.stringify({
+          title: title,
+          description: description,
+        }),
+        headers: {
+          "Content-type" : "application/json"
+        }
+      })
+        .then(async function(res) {
+          const json = await res.json();
+          alert("Todo added");
+        })
+        setTodos([...todos, {
+          title,
+          description
+        }])
+  }
 
   return <div>
     <input id="title" style={{
@@ -24,27 +46,6 @@ export function CreateTodo(props){
     <button style={{
       padding: 10,
       margin: 10,
-    }} onClick={()=>{
-      
-      fetch("http://localhost:3000/todos",{
-        method: "POST",
-        body: JSON.stringify({
-          title: title,
-          description: description,
-        }),
-        headers: {
-          "Content-type" : "application/json"
-        }
-      })
-        .then(async function(res) {
-          const json = await res.json();
-          alert("Todo added");
-        })
-        props.setSetTodos([...Todos, {
-          title,
-          description,
-          e
-        }])
-    }} >Add a todo</button>
+    }} onClick={callBackend} >Add a todo</button>
   </div>
 }
